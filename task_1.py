@@ -51,10 +51,10 @@ class Mentor:
     def __init__(self, name, surname):
         self.name = name
         self.surname = surname
-        self.courses_attached = []
+
 class Lecturer(Mentor):
     def __init__(self, name, surname):
-        super().__init__(self, name, surname)
+        super().__init__(name, surname)
         self.courses_attached = []
         self.grades = {}
 
@@ -90,11 +90,9 @@ class Lecturer(Mentor):
 
 
 
-
-
 class Reviewer(Mentor):
     def __init__(self, name, surname):
-        super().__init__(self, name, surname)
+        super().__init__(name, surname)
     def rate_hw(self, student, course, grade):
         if isinstance(student, Student) and course in self.courses_attached and course in student.courses_in_progress:
             if course in student.grades:
@@ -128,29 +126,29 @@ class Reviewer(Mentor):
     lecturer_2.courses_attached = ['Java']
     print(lecturer_2)
 
-    # ревьювер 1
+    # ревивер 1
     reviewer_1 = Reviewer('Джон', 'Сидоров')
     reviewer_1.courses_attached = ['Git']
     print(reviewer_1)
 
-    # ревьювер 2
+    # ревивер 2
     reviewer_2 = Reviewer('Ким', 'Чен Ыр')
     reviewer_2.courses_attached = ['С++']
     print(reviewer_2)
 
     # проверка методов
     student_1.rate_lec(lecturer_1, 'Git', 10)  # несотв. лектора и курса
-    student_1.rate_lec(lecturer_1, 'Python', 8)
-    student_2.rate_lec(lecturer_1, 'Python', 10)
-    student_2.rate_lec(lecturer_2, 'Git', 5)
+    student_1.rate_lec(lecturer_1, 'SQL', 8)
+    student_2.rate_lec(lecturer_1, 'SQL', 10)
+    student_2.rate_lec(lecturer_2, 'Java', 5)
     print('Оценки 1-го преподавателя', lecturer_1.grades)
 
-    reviewer_1.rate_hw(student_1, 'Python', 7)
     reviewer_1.rate_hw(student_1, 'Git', 7)
+    reviewer_1.rate_hw(student_1, 'C#', 7)
     print(f'Оценки 1-го студента {student_1.grades}')
 
     reviewer_2.rate_hw(student_2, 'Git', 9)
-    reviewer_1.rate_hw(student_2, 'Python', 6)
+    reviewer_1.rate_hw(student_2, 'C#', 6)
     print(f'Оценки 2-го студента {student_2.grades}')
 
     # сравнение студентов
@@ -167,7 +165,7 @@ class Reviewer(Mentor):
 
     # методы подсчета средней оценки
 
-    def average_rating_hw(students: list, course: str):
+    def av_rating_st(students: list, course: str):
         rating, count = 0, 0
         for student in students:
             if student.grades.get(course, None):
@@ -175,7 +173,7 @@ class Reviewer(Mentor):
                 count += 1
         return rating / count if count != 0 else 'нет данных'
 
-    def average_rating_lr(lectors: list, course: str):
+    def av_rating_lec(lectors: list, course: str):
         rating, count = 0, 0
         for lector in lectors:
             if lector.grades.get(course, None):
@@ -183,10 +181,10 @@ class Reviewer(Mentor):
                 count += 1
         return rating / count if count != 0 else 'нет данных'
 
-    print(average_rating_hw([student_1, student_2], 'Python'))
-    print(average_rating_hw([student_1, student_2], 'Git'))
-    print(average_rating_hw([student_1, student_2], 'Java'))
-    print()
-    print(average_rating_lr([lecturer_1, lecturer_2], 'Python'))
-    print(average_rating_lr([lecturer_1, lecturer_2], 'Git'))
-    print(average_rating_lr([lecturer_1, lecturer_2], 'Java'))
+    # print(av_rating_st([student_1, student_2], 'Python'))
+    # print(av_rating_st([student_1, student_2], 'Git'))
+    # print(av_rating_st([student_1, student_2], 'Java'))
+    # print()
+    # print(av_rating_lec([lecturer_1, lecturer_2], 'Python'))
+    # print(av_rating_lec([lecturer_1, lecturer_2], 'Git'))
+    # print(av_rating_lec([lecturer_1, lecturer_2], 'Java'))
